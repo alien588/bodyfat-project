@@ -24,7 +24,7 @@ for i in data:
     plt.axvline(median,color= 'k', linewidth= 1)
     plt.axvline(avg, color= 'r', linewidth= 1)
     #plt.show()
-
+plt.savefig('porazdelitve_podatkov.jpg', format= 'jpeg')
 
 # Create new features from existing ones (Density and Abdomen-Hip ratio)
 data['density [g/cm^3]'] = np.pi * data['hip [cm]'] * data['hip [cm]'] * data['height [cm]'] / 1000
@@ -113,5 +113,15 @@ reg_final_1.fit(X_train,Y_train)
 y_p = reg_final_1.predict(X_test)
 
 display = PredictionErrorDisplay.from_predictions(y_true= Y_test,y_pred= y_p,kind= "actual_vs_predicted")
+plt.savefig('regresija_rezultati.jpg', format= 'jpeg')
 plt.show()
 
+# Plotting a scatter plot in 2d where 2 of the most correlated features represent the axis and
+# the hue represent the value of the target variable
+
+subsets = [data['weight [kg]'], data['hip [cm]']]
+
+plt.scatter(subsets[0], subsets[1], c= data['body fat [%]'], cmap= 'viridis')
+plt.colorbar()
+plt.savefig('barvi_graf.jpg', format= 'jpeg')
+plt.show()
